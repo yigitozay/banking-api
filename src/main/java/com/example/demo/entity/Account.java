@@ -1,16 +1,13 @@
-package com.example.demo.Entity;
+package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-public class AccountEntity {
+public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,16 +16,21 @@ public class AccountEntity {
     private String accountNumber;
     private BigDecimal balance;
     private LocalDateTime createdAt;
-    private List<transactions> transactions;
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    private List<Transaction> transactions;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+    protected Account(){ }
 
-    protected AccountEntity(){ }
+    public Account(String accountNumber, BigDecimal balance, LocalDateTime createdAt, List<Transaction> transactions, Customer customer) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+        this.createdAt = createdAt;
+        this.transactions = transactions;
+        this.customer = customer;
+    }
 
-    public AccountEntity(String accountNumber, BigDecimal balance, LocalDateTime createdAt,List<transactions> transactions ){
-            this.accountNumber = accountNumber;
-            this.balance = balance;
-            this.createdAt = createdAt;
-            this.transactions = transactions;
-        }
 
     public Long getId() {
         return id;
@@ -62,11 +64,11 @@ public class AccountEntity {
         this.createdAt = createdAt;
     }
 
-    public List<transactions> getTransactions() {
+    public List<Transaction> getTransactions() {
         return transactions;
     }
 
-    public void setTransactions(List<transactions> transactions) {
+    public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
     }
 }
