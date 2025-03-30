@@ -15,18 +15,32 @@ public class Customer {
     private String name;
     @Column(nullable = false, unique = true)
     private String email;
+    private String password;
     private LocalDateTime createdAt;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Account> accounts;
 
     protected Customer(){}
 
-    public Customer(String name, String email, LocalDateTime createdAt, List<Account> accounts){
+    public Customer(String name, String email, String password, LocalDateTime createdAt, List<Account> accounts){
         this.name=name;
         this.email = email;
+        this.password = password;
         this.createdAt = createdAt;
         this.accounts = accounts;
 
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 
     public Long getId() {

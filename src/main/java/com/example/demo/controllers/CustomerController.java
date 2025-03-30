@@ -6,6 +6,7 @@ import com.example.demo.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public class CustomerController {
 
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping
     public List<Customer> getAllCustomers(){
@@ -29,6 +32,7 @@ public class CustomerController {
     }
     @PostMapping
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer){
+        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         Customer newCustomer = customerRepository.save(customer);
         return ResponseEntity.status(HttpStatus.CREATED).body(newCustomer);
     }
