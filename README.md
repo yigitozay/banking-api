@@ -38,46 +38,80 @@ mvn clean install
 mvn spring-boot:run
 The API will start on http://localhost:8080.
 
-Usage
+# Usage
+
 Test the API with Postman or any HTTP client:
 
-Register a User:
-POST /api/auth/register
-Body: {"email": "user@example.com", "password": "pass123"}
-Response: JWT token
+## Register a User
+**POST** `/api/auth/register`
 
-Login:
-POST /api/auth/login
-Body: {"email": "user@example.com", "password": "pass123"}
-Response: JWT token
+- **Body:**
+  \`\`\`json
+  {
+    "email": "user@example.com",
+    "password": "pass123"
+  }
+  \`\`\`
+- **Response:** JWT token
 
-Deposit Funds:
-POST /api/accounts/{accountId}/deposit
-Headers: Authorization: Bearer <jwt-token>
-Body: 50.00
-Withdraw Funds:
+## Login
+**POST** `/api/auth/login`
 
-POST /api/accounts/{accountId}/withdraw
-Headers: Authorization: Bearer <jwt-token>
-Body: 30.00
-Transfer Funds:
+- **Body:**
+  \`\`\`json
+  {
+    "email": "user@example.com",
+    "password": "pass123"
+  }
+  \`\`\`
+- **Response:** JWT token
 
-POST /api/accounts/transfer?fromAccountId=1&toAccountId=2&amount=10.00
-Headers: Authorization: Bearer <jwt-token>
+## Deposit Funds
+**POST** `/api/accounts/{accountId}/deposit`
 
-Project Highlights
-Secure Authentication: Implemented JWT and BCrypt for user security.
-Transaction Logic: Built atomic operations with balance checks using @Transactional.
-Learning Journey: Developed as a self-directed project to master Spring Boot and fintech concepts.
-Future Enhancements
-Add unit tests with JUnit and Mockito.
-Deploy to a cloud platform (e.g., Heroku, AWS).
-Enhance input validation and error handling.
-Contributing
+- **Headers:** 
+  \`\`\`
+  Authorization: Bearer <jwt-token>
+  \`\`\`
+- **Body:** `50.00`
+
+## Withdraw Funds
+**POST** `/api/accounts/{accountId}/withdraw`
+
+- **Headers:**
+  \`\`\`
+  Authorization: Bearer <jwt-token>
+  \`\`\`
+- **Body:** `30.00`
+
+## Transfer Funds
+**POST** `/api/accounts/transfer?fromAccountId=1&toAccountId=2&amount=10.00`
+
+- **Headers:**
+  \`\`\`
+  Authorization: Bearer <jwt-token>
+  \`\`\`
+
+# Project Highlights
+
+- **Secure Authentication:** Implemented JWT and BCrypt for user security.
+- **Transaction Logic:** Built atomic operations with balance checks using \`@Transactional\`.
+- **Learning Journey:** Developed as a self-directed project to master Spring Boot and fintech concepts.
+
+# Future Enhancements
+
+- Add unit tests with JUnit and Mockito.
+- Deploy to a cloud platform (e.g., Heroku, AWS).
+- Enhance input validation and error handling.
+
+# Contributing
+
 Feel free to fork this repo and submit pull requests with improvements!
 
-Author
+# Author
+
 Yiğit Özay
 
-LinkedIn: [(https://www.linkedin.com/in/yi%C4%9Fit-%C3%B6zay/?trk=opento_sprofile_details](https://www.linkedin.com/in/yi%C4%9Fit-%C3%B6zay/)
+
+LinkedIn: (https://www.linkedin.com/in/yi%C4%9Fit-%C3%B6zay/)
 Email: yigit.ozay344@gmail.com
